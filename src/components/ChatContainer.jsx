@@ -1,13 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import './ChatContainer.css';
+import { baseUrl } from '../API/api';
 import { GiHamburgerMenu } from 'react-icons/gi'
 import ChatInput from './ChatInput';
 import {v4 as uuidv4} from 'uuid';
 
 function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
-  const url = `http://localhost:4000/msg/addmessage`;
-  const getallmsg = `http://localhost:4000/msg/getallmsg`;
+  const url = `${baseUrl}/msg/addmessage`;
+  const getallmsg = `${baseUrl}/msg/getallmsg`;
 
   const [messages, setMessages] = useState([]);
   const [arrivalMsg, setArrivalMsg] = useState(null);
