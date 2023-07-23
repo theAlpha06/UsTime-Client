@@ -1,0 +1,37 @@
+.input_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+.input_form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.msg_input {
+  width: 90%;
+  height: 40px;
+  border-radius: 3rem 0 0 3rem;
+  border: none;
+  padding-left: 1rem;
+}
+
+.msg_input:focus {
+  border: none;
+  outline: none;
+}
+
+.sendmsg_button {
+  height: 40px;
+  padding: 0.7rem 1rem;
+  border-radius: 0 3rem 3rem 0;
+  font-weight: 600;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+}

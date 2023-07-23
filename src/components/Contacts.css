@@ -1,0 +1,98 @@
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 10px;
+}
+  */
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #b0b3b8; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #e4e6eb; 
+}
+
+
+.contacts_container {
+  display: flex;
+  align-items: space-between;
+  justify-content: space-between;
+  flex-direction: column;
+  height: 100%;
+  background-color: rgb(9, 19, 53);
+  border-radius: 1rem;
+}
+
+.hamburger, .logout {
+  cursor: pointer;
+}
+
+.contacts_contacts {
+  padding: 1rem 0.5rem 0.5rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: calc(100% - 70px);
+  gap: 0.5rem;
+  overflow-y: scroll;
+}
+
+.contacts_list {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 0.4rem;
+  background-color:#3a3b3c;
+  cursor: pointer;
+}
+
+.selectedChat {
+  background-color: #006AFF;
+}
+
+.contacts_avatar {
+  width: 50px;
+}
+
+.contacts_name {
+  font-size: 1rem;
+}
+
+.contacts_currentuser {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  justify-content: space-between;
+  gap: 1rem;
+  border-radius: 1rem 1rem 0 0;
+  border-bottom: 1px solid red;
+  background-color: #0c274e;
+}
+.currentuser_avatar {
+  width: 50px;
+  cursor: pointer;
+}
+
+.currentuser_name {
+  font-size: 1.5rem;
+}
+
+
+@media screen and (max-width: 1400px) {
+  .contacts_currentuser {
+    border-radius: 0 1rem 0 0;
+  }
+}

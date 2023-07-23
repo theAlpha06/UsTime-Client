@@ -1,0 +1,14 @@
+.welcome_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: rgb(9, 19, 53);
+  border-radius: 1rem;
+  position: relative;
+}
+
+.welcome_gif {
+  position: absolute;
+  width: 100%;
+}
