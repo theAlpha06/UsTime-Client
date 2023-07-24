@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import { baseUrl } from "../API/api";
 
 const AuthContext = createContext({
     token: '',
@@ -42,7 +43,7 @@ export const AuthContextProvider = (props) => {
     const remainingTime = calculateRemainingTime(expiryDate);
     setTimeout(logoutHandler, remainingTime);
     if (user.isFirstLogin) {
-      window.location.assign('http://localhost:3000/setavatar')
+      window.location.assign(`${baseUrl}/setavatar`)
       return;
     }
   }
