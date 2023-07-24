@@ -42,7 +42,7 @@ export const AuthContextProvider = (props) => {
     const remainingTime = calculateRemainingTime(expiryDate);
     setTimeout(logoutHandler, remainingTime);
     if (user.isFirstLogin) {
-      window.location.assign(`https://ustime-client-lovwj2nb1-thealpha06.vercel.app//setavatar`)
+      window.location.assign(`https://ustime-client-lovwj2nb1-thealpha06.vercel.app/setavatar`)
       return;
     }
   }
