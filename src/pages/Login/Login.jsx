@@ -11,7 +11,6 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GoogleLogin } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
 
-const clietId = '601397706760-3od9siogho9pvcivv36tr8a0oe7mruo6.apps.googleusercontent.com';
 
 function Login() {
   const [usernameoremail, setUsernameoremail] = useState("");
@@ -34,9 +33,11 @@ function Login() {
             isFirstLogin: res.data.isFirstLogin,
           }
           authContext.login(user);
-          // if (!res.data.isFirstLogin) {
+          if (!res.data.isFirstLogin) {
           navigate("/");
-          // }
+          } else {
+            navigate("/setavatar")
+          }
         } else if (res.status === 208) {
           setIsLoading(false);
           if (res.data.message.includes('User')) {
@@ -126,7 +127,7 @@ function Login() {
               </div>
             </div>
             <div className="register_google">
-              <GoogleOAuthProvider clientId={clietId}>
+              <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENTID}>
                 <GoogleLogin
                   onSuccess={credentialResponse => {handleGoogleLogin(credentialResponse)}}
                   onError={() => {
