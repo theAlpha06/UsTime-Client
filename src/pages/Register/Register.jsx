@@ -11,8 +11,6 @@ import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
 import ReCAPTCHA from "react-google-recaptcha";
 
-const clietId = '601397706760-3od9siogho9pvcivv36tr8a0oe7mruo6.apps.googleusercontent.com';
-
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -185,7 +183,7 @@ function Register() {
             </div>
             <div className="register_method">
               <div className="register_google">
-                <GoogleOAuthProvider clientId={clietId}>
+                <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENTID}>
                   <GoogleLogin
                     onSuccess={credentialResponse => { handleGoogleRegister(credentialResponse) }}
                     onError={() => {
