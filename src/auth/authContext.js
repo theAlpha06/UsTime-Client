@@ -1,4 +1,5 @@
 import { createContext, useState } from 'react';
+import { baseUrl } from "../API/api";
 
 const AuthContext = createContext({
     token: '',
@@ -41,10 +42,6 @@ export const AuthContextProvider = (props) => {
     userLoggedIn = true;
     const remainingTime = calculateRemainingTime(expiryDate);
     setTimeout(logoutHandler, remainingTime);
-    if (user.isFirstLogin) {
-      window.location.assign(`https://ustime-client-lovwj2nb1-thealpha06.vercel.app/setavatar`)
-      return;
-    }
   }
 
   const contextValue = {
