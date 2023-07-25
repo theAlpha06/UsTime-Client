@@ -17,11 +17,17 @@ function Chat() {
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
 
-  const getCurrentUser = async () => {
+  useEffect(() => {
     if (!authContext.isUserLoggedIn) {
       navigate('/login');
+    }
+  }, [authContext.isUserLoggedIn, navigate])
+  
+  const getCurrentUser = async () => {
+    if (!authContext.isUserLoggedIn) {
+      console.log('first')
+      navigate('/login');
     } else {
-      console.log(authContext)
       await axios.get(`${baseUrl}/user/currentuser/${authContext.userId}`)
         .then((res) => {
           setCurrentUser(res.data);
@@ -36,7 +42,6 @@ function Chat() {
     if (!authContext.isUserLoggedIn) {
       navigate('/login');
     } else {
-      // console.log(authContext)
       await axios.get(`${baseUrl}/user/getallusers/${authContext.userId}`)
         .then((res) => {
           setContacts(res.data);
@@ -69,6 +74,9 @@ function Chat() {
   }
 
   useEffect(() => {
+    if (!authContext.isUserLoggedIn) {
+      navigate('/login');
+    }
     if (window.innerWidth < 640) {
       const chatContainer = document.querySelector('.chat_contacts');
       const chatMessages = document.querySelector('.chat_messages');
