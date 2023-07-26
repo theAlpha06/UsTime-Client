@@ -9,12 +9,17 @@
   position: relative;
 }
 
-.welcome_gif {
-  position: absolute;
-  width: 100%;
+.welcome_text {
+  color: black;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  z-index: 99999;
 }
 
 .cube_container {
-  width: 300px;
-  height: 300px;
+  position: absolute;
+  width: 50%;
+  aspect-ratio: 1/1;
 }
