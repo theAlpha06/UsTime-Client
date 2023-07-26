@@ -8,7 +8,7 @@ function Welcome({ currentUser }) {
     <div className='cube_container'>
       <Cube />
     </div>
-      <h1 className='welcome_text'>Welcome, {currentUser?.name} !</h1>
+      {/* <h1 className='welcome_text'>Welcome, {currentUser?.name} !</h1> */}
     </div>
   )
 }

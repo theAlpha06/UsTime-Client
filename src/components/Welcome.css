@@ -23,3 +23,9 @@
   width: 50%;
   aspect-ratio: 1/1;
 }
+
+@media screen and (max-width: 600px) {
+  .cube_container {
+    width: 70%;
+  }
+}

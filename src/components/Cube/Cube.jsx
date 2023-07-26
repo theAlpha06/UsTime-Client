@@ -26,16 +26,14 @@ function Box(props) {
    useFrame(() => (mesh.current.rotation.x = mesh.current.rotation.y += 0.01));
    return (
       <mesh {...props} ref={mesh}>
-         <boxGeometry args={[3, 3, 3]} />
+         <boxGeometry args={[2, 2, 2]} />
          <meshStandardMaterial attach="material" map={base} />
       </mesh>
    );
 }
 export default function Cube() {
    return (
-      <Canvas
-         updateDefaultCamera={true}
-      >
+      <Canvas updateDefaultCamera={true} >
          <CameraController />
          <ambientLight />
          <Box position={[0, 0, 0]} />
