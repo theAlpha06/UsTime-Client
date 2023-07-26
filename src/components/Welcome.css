@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   height: 100%;
   background-color: rgb(9, 19, 53);
   border-radius: 1rem;
@@ -11,4 +12,9 @@
 .welcome_gif {
   position: absolute;
   width: 100%;
+}
+
+.cube_container {
+  width: 300px;
+  height: 300px;
 }
