@@ -7,8 +7,6 @@ import ChatInput from './ChatInput';
 import {v4 as uuidv4} from 'uuid';
 
 function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
-  const url = `${baseUrl}/msg/addmessage`;
-  const getallmsg = `${baseUrl}/msg/getallmsg`;
 
   const [messages, setMessages] = useState([]);
   const [arrivalMsg, setArrivalMsg] = useState(null);
@@ -16,7 +14,7 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
 
   const getAllMsg = async() => {
     if(currentChat) {
-      const response = await axios.post(getallmsg, {
+      const response = await axios.post(`${baseUrl}/msg/getallmsg`, {
         from: currentUser._id,
         to: currentChat._id,
       })
@@ -33,7 +31,7 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
   }, [currentChat])
 
   const handleSendMessage = async(msg) => {
-    await axios.post(url, {
+    await axios.post(`${baseUrl}/msg/addmessage`, {
       from: currentUser._id,
       to: currentChat._id,
       message: msg

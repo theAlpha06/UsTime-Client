@@ -125,7 +125,7 @@
   color: red;
   padding: 0 0 0.9rem 0;
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   font-size: 1.3rem;
   gap: 3px;

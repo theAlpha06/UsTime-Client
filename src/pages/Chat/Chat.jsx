@@ -8,6 +8,7 @@ import axios from "axios";
 import Contacts from "../../components/Contacts";
 import Welcome from "../../components/Welcome";
 import ChatContainer from "../../components/ChatContainer";
+import Loader from "../../components/Loader/Loader";
 
 function Chat() {
   const socket = useRef();
@@ -16,16 +17,17 @@ function Chat() {
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!authContext.isUserLoggedIn) {
       navigate('/login');
     }
   }, [authContext.isUserLoggedIn, navigate])
-  
+
   const getCurrentUser = async () => {
+    setIsLoading(true);
     if (!authContext.isUserLoggedIn) {
-      console.log('first')
       navigate('/login');
     } else {
       await axios.get(`${baseUrl}/user/currentuser/${authContext.userId}`)
@@ -44,6 +46,7 @@ function Chat() {
     } else {
       await axios.get(`${baseUrl}/user/getallusers/${authContext.userId}`)
         .then((res) => {
+          setIsLoading(false);
           setContacts(res.data);
         })
         .catch((err) => {
@@ -80,8 +83,8 @@ function Chat() {
     if (window.innerWidth < 640) {
       const chatContainer = document.querySelector('.chat_contacts');
       const chatMessages = document.querySelector('.chat_messages');
-      chatContainer.setAttribute("style", "width: 100%");
-      chatMessages.setAttribute("style", "display: none");
+      chatContainer && chatContainer.setAttribute("style", "width: 100%");
+      chatMessages && chatMessages.setAttribute("style", "display: none");
     }
   })
 
@@ -102,33 +105,39 @@ function Chat() {
 
 
   return (
-    <div className="chat_container">
-      <div className='chat_content'>
-        <div className="chat_contacts">
-          <Contacts
-            contacts={contacts}
-            currentUser={currentUser}
-            changeChat={handleChatChange}
-            handleResponsive={handleResponsive}
-          />
-        </div>
-        <div className="chat_messages">
-          {
-            currentChat === undefined ?
-              <Welcome
-                currentUser={currentUser}
-              />
-              :
-              <ChatContainer
-                currentChat={currentChat}
-                currentUser={currentUser}
-                socket={socket}
-                handleResponsive={handleResponsive}
-              />
-          }
-        </div>
-      </div>
-    </div>
+    <>
+      {
+        isLoading ?
+          <Loader /> :
+          <div className="chat_container">
+            <div className='chat_content'>
+              <div className="chat_contacts">
+                <Contacts
+                  contacts={contacts}
+                  currentUser={currentUser}
+                  changeChat={handleChatChange}
+                  handleResponsive={handleResponsive}
+                />
+              </div>
+              <div className="chat_messages">
+                {
+                  currentChat === undefined ?
+                    <Welcome
+                      currentUser={currentUser}
+                    />
+                    :
+                    (<ChatContainer
+                      currentChat={currentChat}
+                      currentUser={currentUser}
+                      socket={socket}
+                      handleResponsive={handleResponsive}
+                    />)
+                }
+              </div>
+            </div>
+          </div>
+      }
+    </>
   )
 }
 
