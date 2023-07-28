@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react';
-import { baseUrl } from "../API/api";
 
 const AuthContext = createContext({
     token: '',
