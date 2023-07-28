@@ -1,6 +1,6 @@
 import axios from 'axios';
-// export const baseUrl = 'http://localhost:4000';
-export const baseUrl = 'https://ustime.onrender.com';
+export const baseUrl = 'http://localhost:4000';
+// export const baseUrl = 'https://ustime.onrender.com';
 
 export const localUrlIns = axios.create({
   baseURL: baseUrl,
