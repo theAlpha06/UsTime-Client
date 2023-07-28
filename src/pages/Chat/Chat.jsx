@@ -18,6 +18,7 @@ function Chat() {
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
+  const [onlineUsers, setOnlineUsers] = useState(null)
 
   useEffect(() => {
     if (!authContext.isUserLoggedIn) {
@@ -67,8 +68,35 @@ function Chat() {
     if (currentUser) {
       socket.current = io(`${baseUrl}`);
       socket.current.emit("add-user", currentUser._id);
+      socket.current.on("online-users", (users) => {
+        setOnlineUsers(users);
+      })
     }
-  }, [currentUser])
+  }, [currentUser]);
+
+
+  useEffect(() => {
+    const handleFocus = async () => {
+      socket.current.emit("add-user", currentUser._id);
+      socket.current.on("online-users", (users) => {
+        setOnlineUsers(users);
+      });
+    };
+
+    const handleBlur = () => {
+      if(currentUser) {
+        socket.current.emit("offline")   
+      }
+    };
+
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('blur', handleBlur);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('blur', handleBlur);
+    };   
+  }, [currentUser]);
 
 
 
@@ -130,6 +158,7 @@ function Chat() {
                       currentChat={currentChat}
                       currentUser={currentUser}
                       socket={socket}
+                      onlineUsers={onlineUsers}
                       handleResponsive={handleResponsive}
                     />)
                 }

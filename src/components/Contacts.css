@@ -63,8 +63,19 @@
 }
 
 .contacts_avatar {
+  /* position: relative; */
   width: 50px;
 }
+
+/* .online_dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 100%;
+  background-color: #00FF00;
+  position: absolute;
+  top: 0;
+  right: 0;
+} */
 
 .contacts_name {
   font-size: 1rem;

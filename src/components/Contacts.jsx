@@ -33,7 +33,6 @@ function Contacts({ contacts, currentUser, changeChat, handleResponsive }) {
         <div className='logout'>
           <Logout />
         </div>
-
       </div>
       <div className='contacts_contacts'>
         {
@@ -51,6 +50,7 @@ function Contacts({ contacts, currentUser, changeChat, handleResponsive }) {
                     <img src={`data:image/svg+xml;base64,${user.avatarImage}`} alt=''
                       width={50}
                     />
+                    {/* <div className='online_dot'></div> */}
                   </div>
                   <div className='contacts_name'>
                     {user.name}
@@ -58,7 +58,6 @@ function Contacts({ contacts, currentUser, changeChat, handleResponsive }) {
                 </div>
               )
             )
-
           })
         }
       </div>

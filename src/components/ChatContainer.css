@@ -25,6 +25,19 @@
 
 .currentChat_name {
   font-size: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+}
+
+.user_name {
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+.user_status {
+  font-size: 0.6em;
 }
 
 .currentChat_messages {

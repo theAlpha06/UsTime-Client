@@ -4,16 +4,15 @@ import './ChatContainer.css';
 import { baseUrl } from '../API/api';
 import { GiHamburgerMenu } from 'react-icons/gi'
 import ChatInput from './ChatInput';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
-function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
+function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onlineUsers }) {
 
   const [messages, setMessages] = useState([]);
   const [arrivalMsg, setArrivalMsg] = useState(null);
   const scrollRef = useRef();
-
-  const getAllMsg = async() => {
-    if(currentChat) {
+  const getAllMsg = async () => {
+    if (currentChat) {
       const response = await axios.post(`${baseUrl}/msg/getallmsg`, {
         from: currentUser._id,
         to: currentChat._id,
@@ -30,7 +29,7 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
     getAllMsg();
   }, [currentChat])
 
-  const handleSendMessage = async(msg) => {
+  const handleSendMessage = async (msg) => {
     await axios.post(`${baseUrl}/msg/addmessage`, {
       from: currentUser._id,
       to: currentChat._id,
@@ -52,9 +51,8 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
   }
 
   useEffect(() => {
-    if (socket.current){
+    if (socket.current) {
       socket.current.on("msg-recieve", (data) => {
-        console.log(data)
         setArrivalMsg({
           fromSelf: false,
           message: data.message,
@@ -78,7 +76,6 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
     <div className='chat_messagecontainer'>
       <div className='messagecontainer-header'>
         <div className='currentchat_details'>
-
           <div className='currentchat_image'>
             <img
               src={`data:image/svg+xml;base64,${currentChat?.avatarImage}`}
@@ -86,15 +83,22 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
             />
           </div>
           <div className='currentChat_name'>
-            <h4>{currentChat.name}</h4>
+            <h4 className='user_name'>{currentChat.name}</h4>
+            <span className='user_status'>
+            {
+              ( Array.isArray(onlineUsers) && onlineUsers?.includes(currentChat._id) ) ? 
+              'Online' :
+              'Offline'
+            }
+            </span>
           </div>
         </div>
         <div className='hamburger'>
-            <GiHamburgerMenu 
-              size={30}
-              onClick={() => handleClick()}  
-            />
-          </div>
+          <GiHamburgerMenu
+            size={30}
+            onClick={() => handleClick()}
+          />
+        </div>
       </div>
       <div className='currentChat_messages'>
         <div>
@@ -103,7 +107,7 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
               return (
                 <div className='currentchat_msg' ref={scrollRef} key={uuidv4()}>
                   <div
-                     className={`message ${msg.fromSelf ? "sended" : "recieved"}`}
+                    className={`message ${msg.fromSelf ? "sended" : "recieved"}`}
                   >
                     <div className='currentchat_content'>
                       <p className='chat_msg'>{msg.message}</p>
