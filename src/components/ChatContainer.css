@@ -53,23 +53,32 @@
 .recieved {
   justify-content: flex-start;
 }
+.msg_time {
+  font-size: 0.7rem;
+  color: #ddd;
+  align-self: flex-end;
+}
 .sended > .currentchat_content {
   background-color:  #006AFF;
-  border-radius: 2rem;
-  max-width: 45%;
+  border-radius: 0.6rem;
+  max-width: 50%;
   overflow-wrap: break-word;
-  padding: 1rem;
+  padding: 7px 7px 4px 7px;
   font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .recieved > .currentchat_content {
   background-color:  #0c274e;
-  border-radius: 2rem;
-  max-width: 45%;
+  border-radius: 0.6rem;
+  max-width: 50%;
   overflow-wrap: break-word;
-  padding: 1rem;
+  padding: 7px 0 7px 7px;
   font-size: 1rem;
 }
+
 
 .currentChat_input {
   background-color: #0c274e;

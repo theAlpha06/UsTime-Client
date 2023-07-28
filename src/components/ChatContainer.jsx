@@ -34,7 +34,7 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
     await axios.post(`${baseUrl}/msg/addmessage`, {
       from: currentUser._id,
       to: currentChat._id,
-      message: msg
+      message: msg,
     });
     socket.current.emit("send-msg", {
       from: currentUser._id,
@@ -44,7 +44,8 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
     const msgs = [...messages];
     msgs.push({
       fromSelf: true,
-      message: msg
+      message: msg,
+      timestamp: new Date()
     });
     setMessages(msgs);
   }
@@ -102,7 +103,8 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
                      className={`message ${msg.fromSelf ? "sended" : "recieved"}`}
                   >
                     <div className='currentchat_content'>
-                      <p>{msg.message}</p>
+                      <p className='chat_msg'>{msg.message}</p>
+                      <span className='msg_time'>{`${new Date(msg.timestamp).getHours()}:${new Date(msg.timestamp).getMinutes()}`}</span>
                     </div>
                   </div>
                 </div>
