@@ -63,7 +63,7 @@
   border-radius: 0.6rem;
   max-width: 50%;
   overflow-wrap: break-word;
-  padding: 7px 7px 4px 7px;
+  padding: 7px 10px 4px 10px;
   font-size: 1rem;
   display: flex;
   flex-direction: column;
@@ -75,8 +75,11 @@
   border-radius: 0.6rem;
   max-width: 50%;
   overflow-wrap: break-word;
-  padding: 7px 0 7px 7px;
+  padding: 7px 10px 4px 10px;
   font-size: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 

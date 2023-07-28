@@ -39,7 +39,8 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
     socket.current.emit("send-msg", {
       from: currentUser._id,
       to: currentChat._id,
-      message: msg
+      message: msg,
+      timestamp: new Date()
     });
     const msgs = [...messages];
     msgs.push({
@@ -53,9 +54,11 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive }) {
   useEffect(() => {
     if (socket.current){
       socket.current.on("msg-recieve", (data) => {
+        console.log(data)
         setArrivalMsg({
           fromSelf: false,
-          message: data
+          message: data.message,
+          timestamp: data.timestamp
         });
       })
     }
