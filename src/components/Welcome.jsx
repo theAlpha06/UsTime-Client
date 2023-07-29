@@ -6,9 +6,11 @@ function Welcome({ currentUser }) {
   return (
     <div className='welcome_container'>
     <div className='cube_container'>
-      <Cube />
+    {
+      !!window.WebGL2RenderingContext ? <Cube /> : <h1 className='welcome_text'>Welcome, {currentUser?.name} !</h1>
+    }
+      {/* <Cube /> */}
     </div>
-      {/* <h1 className='welcome_text'>Welcome, {currentUser?.name} !</h1> */}
     </div>
   )
 }
