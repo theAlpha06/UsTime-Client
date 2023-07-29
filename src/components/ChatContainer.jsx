@@ -10,6 +10,8 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onl
 
   const [messages, setMessages] = useState([]);
   const [arrivalMsg, setArrivalMsg] = useState(null);
+  const [isTyping, setIsTyping] = useState(false);
+
   const scrollRef = useRef();
   const getAllMsg = async () => {
     if (currentChat) {
@@ -63,6 +65,17 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onl
   }, [])
 
   useEffect(() => {
+    if (socket.current) {
+      socket.current.on('typing', (data) => {
+        setIsTyping(data.typing);
+        setTimeout(() => {
+          setIsTyping(false);
+        }, 1000);
+      })
+    }
+  }, [])
+
+  useEffect(() => {
     if (arrivalMsg) {
       setMessages((prev) => [...prev, arrivalMsg]);
     }
@@ -86,9 +99,9 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onl
             <h4 className='user_name'>{currentChat.name}</h4>
             <span className='user_status'>
             {
-              ( Array.isArray(onlineUsers) && onlineUsers?.includes(currentChat._id) ) ? 
+              ( Array.isArray(onlineUsers) && onlineUsers?.includes(currentChat._id) && !isTyping) ? 
               'Online' :
-              'Offline'
+              isTyping ? 'typing...' : 'Offline'
             }
             </span>
           </div>
@@ -121,7 +134,7 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onl
         </div>
       </div>
       <div className='currentChat_input'>
-        <ChatInput handleSendMessage={handleSendMessage} />
+        <ChatInput handleSendMessage={handleSendMessage} socket={socket} currentChat={currentChat}/>
       </div>
     </div>
   )

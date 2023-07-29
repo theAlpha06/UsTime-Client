@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ChatInput.css';
 
-function ChatInput({handleSendMessage}) {
+function ChatInput({handleSendMessage, socket, currentChat}) {
   const [msg, setMsg] = useState("");
 
   const sendChat = (event) => {
@@ -13,6 +13,14 @@ function ChatInput({handleSendMessage}) {
     }
   }
 
+  const handleTyping = () => {
+    window.addEventListener('keydown', () => {
+      socket.current.emit('typing', {
+          to: currentChat._id,
+          typing: true,
+        });
+      })
+  }
   return (
     <div className='input_container'>
       <form onSubmit={(e) => sendChat(e)} className='input_form'>
@@ -21,6 +29,7 @@ function ChatInput({handleSendMessage}) {
           placeholder='Message' 
           onChange={(e => setMsg(e.target.value))}
           className='msg_input'
+          onFocus={handleTyping()}
         />
         <button 
           type='submit' 
