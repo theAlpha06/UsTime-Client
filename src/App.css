@@ -3,6 +3,9 @@
   --background-color: #000;
   --link-color: lightblue;
   --tray-color: #1e1a1a;
+  --bubble-color-sent: #006AFF;
+  --bubble-color-recieved: #0c274e;
+  --border-line: red;
 }
 
 * {

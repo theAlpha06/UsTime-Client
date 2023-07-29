@@ -11,10 +11,10 @@
   justify-content: space-between;
   width: 100%;
   height: 70px;
-  background-color: #0c274e;
+  background-color: var(--bubble-color-recieved);
   border-radius: 1rem 1rem 0 0;
   padding: 1rem;
-  border-bottom: 1px solid red;
+  border-bottom: 1px solid var(--border-line);
 }
 
 .currentchat_details {
@@ -74,6 +74,12 @@
   align-self: flex-end;
 }
 
+.msg_status {
+  font-size: 1rem;
+  color: var(--bubble-color-sent);
+  align-self: flex-end;
+}
+
 .currentchat_content {
   border-radius: 0.6rem;
   max-width: 50%;
@@ -85,18 +91,18 @@
   gap: 5px;
 }
 .sended > .currentchat_content {
-  background-color:  #006AFF;
+  background-color:  var(--bubble-color-sent);
 }
 
 .recieved > .currentchat_content {
-  background-color:  #0c274e;
+  background-color:  var(--bubble-color-recieved);
 }
 
 
 .currentChat_input {
-  background-color: #0c274e;
+  background-color: var(--bubble-color-recieved);
   border-radius: 0 0 1rem 1rem;
-  border-top: 1px solid red;
+  border-top: 1px solid var(--border-line);
   height: 80px;
 }
 

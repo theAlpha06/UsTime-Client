@@ -5,6 +5,7 @@ import { baseUrl } from '../API/api';
 import { GiHamburgerMenu } from 'react-icons/gi'
 import ChatInput from './ChatInput';
 import { v4 as uuidv4 } from 'uuid';
+import { BsCheckCircle, BsCheckCircleFill, BsCheckLg } from 'react-icons/bs';
 
 function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onlineUsers }) {
 
@@ -124,8 +125,13 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onl
                   >
                     <div className='currentchat_content'>
                       <p className='chat_msg'>{msg.message}</p>
-                      <span className='msg_time'>{`${new Date(msg.timestamp).getHours()}:${new Date(msg.timestamp).getMinutes()}`}</span>
+                    <span className='msg_time'>
+                    {`${new Date(msg.timestamp).getHours()}:${new Date(msg.timestamp).getMinutes()}`}
+                    </span>
                     </div>
+                  {/* <BsCheckLg className='msg_status' />
+                  <BsCheckCircle className='msg_status' />
+                  <BsCheckCircleFill className='msg_status' /> */}
                   </div>
                 </div>
               )

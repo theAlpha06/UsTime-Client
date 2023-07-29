@@ -127,7 +127,7 @@ function Login() {
               </div>
             </div>
             <div className="register_google">
-              <GoogleOAuthProvider clientId={process.env.REACT_APP_GOOGLE_CLIENTID}>
+              <GoogleOAuthProvider clientId={'601397706760-3od9siogho9pvcivv36tr8a0oe7mruo6.apps.googleusercontent.com'}>
                 <GoogleLogin
                   onSuccess={credentialResponse => {handleGoogleLogin(credentialResponse)}}
                   onError={() => {
