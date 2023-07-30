@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './ChatInput.css';
 
-function ChatInput({handleSendMessage, socket, currentChat}) {
+function ChatInput({handleSendMessage, socket, currentChat, currentUser}) {
+  
   const [msg, setMsg] = useState("");
 
   const sendChat = (event) => {
@@ -16,6 +17,7 @@ function ChatInput({handleSendMessage, socket, currentChat}) {
   const handleTyping = () => {
     window.addEventListener('keydown', () => {
       socket.current.emit('typing', {
+          from: currentUser._id,
           to: currentChat._id,
           typing: true,
         });

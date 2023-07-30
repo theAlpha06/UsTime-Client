@@ -8,10 +8,10 @@ import { v4 as uuidv4 } from 'uuid';
 import { BsCheckCircle, BsCheckCircleFill, BsCheckLg } from 'react-icons/bs';
 
 function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onlineUsers }) {
-
   const [messages, setMessages] = useState([]);
   const [arrivalMsg, setArrivalMsg] = useState(null);
   const [isTyping, setIsTyping] = useState(false);
+  const [currentChatId, setCurrentChatId] = useState(null)
 
   const scrollRef = useRef();
   const getAllMsg = async () => {
@@ -69,8 +69,10 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onl
     if (socket.current) {
       socket.current.on('typing', (data) => {
         setIsTyping(data.typing);
+        setCurrentChatId(data.from)
         setTimeout(() => {
           setIsTyping(false);
+          setCurrentChatId(null);
         }, 1000);
       })
     }
@@ -99,11 +101,11 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onl
           <div className='currentChat_name'>
             <h4 className='user_name'>{currentChat.name}</h4>
             <span className='user_status'>
-            {
-              ( Array.isArray(onlineUsers) && onlineUsers?.includes(currentChat._id) && !isTyping) ? 
-              'Online' :
-              isTyping ? 'typing...' : 'Offline'
-            }
+              {
+                (Array.isArray(onlineUsers) && onlineUsers?.includes(currentChat._id) && !isTyping) ?
+                  'Online' :
+                  (isTyping && currentChat._id === currentChatId) ? 'typing...' : 'Offline'
+              }
             </span>
           </div>
         </div>
@@ -125,13 +127,13 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onl
                   >
                     <div className='currentchat_content'>
                       <p className='chat_msg'>{msg.message}</p>
-                    <span className='msg_time'>
-                    {`${new Date(msg.timestamp).getHours()}:${new Date(msg.timestamp).getMinutes()}`}
-                    </span>
+                      <span className='msg_time'>
+                        {`${new Date(msg.timestamp).getHours()}:${new Date(msg.timestamp).getMinutes()}`}
+                      </span>
                     </div>
-                  {/* <BsCheckLg className='msg_status' />
-                  <BsCheckCircle className='msg_status' />
-                  <BsCheckCircleFill className='msg_status' /> */}
+                    {
+                      msg.status === 'sent' ? <BsCheckLg className='msg_status' /> : msg.status === 'delivered' ? <BsCheckCircle className='msg_status' /> : <BsCheckCircleFill className='msg_status' />
+                    }
                   </div>
                 </div>
               )
@@ -140,7 +142,7 @@ function ChatContainer({ currentChat, currentUser, socket, handleResponsive, onl
         </div>
       </div>
       <div className='currentChat_input'>
-        <ChatInput handleSendMessage={handleSendMessage} socket={socket} currentChat={currentChat}/>
+        <ChatInput handleSendMessage={handleSendMessage} socket={socket} currentChat={currentChat} currentUser={currentUser} />
       </div>
     </div>
   )
