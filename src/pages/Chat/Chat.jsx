@@ -75,28 +75,28 @@ function Chat() {
   }, [currentUser]);
 
 
-  // useEffect(() => {
-  //   const handleFocus = async () => {
-  //     socket.current.emit("add-user", currentUser._id);
-  //     socket.current.on("online-users", (users) => {
-  //       setOnlineUsers(users);
-  //     });
-  //   };
+  useEffect(() => {
+    const handleFocus = async () => {
+      socket.current.emit("add-user", currentUser._id);
+      socket.current.on("online-users", (users) => {
+        setOnlineUsers(users);
+      });
+    };
 
-  //   const handleBlur = () => {
-  //     if(currentUser) {
-  //       socket.current.emit("offline")   
-  //     }
-  //   };
+    const handleBlur = () => {
+      if(currentUser) {
+        socket.current.emit("offline")   
+      }
+    };
 
-  //   window.addEventListener('focus', handleFocus);
-  //   window.addEventListener('blur', handleBlur);
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('blur', handleBlur);
 
-  //   return () => {
-  //     window.removeEventListener('focus', handleFocus);
-  //     window.removeEventListener('blur', handleBlur);
-  //   };   
-  // }, [currentUser]);
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('blur', handleBlur);
+    };   
+  }, [currentUser]);
 
 
 

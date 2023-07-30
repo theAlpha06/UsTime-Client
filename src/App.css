@@ -1,11 +1,16 @@
 :root {
   --font-color: #eee;
+  --msg-time: #ddd;
   --background-color: #000;
   --link-color: lightblue;
   --tray-color: #1e1a1a;
   --bubble-color-sent: #006AFF;
   --bubble-color-recieved: #0c274e;
   --border-line: red;
+  --message-container:  rgb(9, 19, 53);
+  --bg-btn: #009dff;
+  --auth-container: #2c2a2a;
+  --auth-container-input: #3e3d3d;
 }
 
 * {

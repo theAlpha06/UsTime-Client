@@ -4,7 +4,7 @@
   justify-content: center;
   flex-direction: column;
   height: 100%;
-  background-color: rgb(9, 19, 53);
+  background-color: var(--message-container);
   border-radius: 1rem;
   position: relative;
 }

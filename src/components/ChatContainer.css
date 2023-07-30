@@ -2,7 +2,7 @@
   height: 100%;
   /* width: 100%; */
   border-radius: 1rem;
-  background-color: rgb(9, 19, 53);
+  background-color:var(--message-container);
 }
 
 .messagecontainer-header {
@@ -70,7 +70,7 @@
 }
 .msg_time {
   font-size: 0.7rem;
-  color: #ddd;
+  color: var(--msg-time);
   align-self: flex-end;
 }
 
@@ -82,7 +82,7 @@
 
 .currentchat_content {
   border-radius: 0.6rem;
-  max-width: 50%;
+  max-width: 45%;
   overflow-wrap: break-word;
   padding: 7px 10px 4px 10px;
   font-size: 1rem;
