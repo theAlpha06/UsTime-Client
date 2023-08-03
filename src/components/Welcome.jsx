@@ -33,15 +33,16 @@ function Welcome({ currentUser }) {
 
   return (
     <div className='welcome_container'>
-      
-        {
-          detectWebGL() ?
+
+      {
+        detectWebGL()
+        ?
           <div className='cube_container'>
             <Cube />
           </div>
-            :
-            <h1 className='welcome_text'>Welcome, {currentUser?.name} !</h1>
-        }
+        :
+          <h1 className='welcome_text'>Welcome, {currentUser?.name} !</h1>
+      }
     </div>
   )
 }
